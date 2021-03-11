@@ -8,6 +8,7 @@ var mapOptions = {
  }
 
 var sfLink = 'https://sketchfab.com/3d-models/archaeology-in-action-546273d5fd4b4625ad61f8837c9fcfc2';
+//link
 
 //Creates map object according to map options
 var map = new L.map('map', mapOptions);
