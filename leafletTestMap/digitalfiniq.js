@@ -7,7 +7,7 @@ var mapOptions = {
  minZoom : 1,
  }
 
-var sfLink = 'bit.ly/3eADQCB';
+var sfLink = 'https://sketchfab.com/3d-models/archaeology-in-action-546273d5fd4b4625ad61f8837c9fcfc2';
 
 //Creates map object according to map options
 var map = new L.map('map', mapOptions);
@@ -55,7 +55,7 @@ map.addLayer(houseImported);
             out.push('<br><b>Type: </b>' + f.properties.Type);
             out.push('<br><b>Date Built: </b>' + f.properties.Date_built);
             out.push('<br><b>Research: </b>' + f.properties.Research);
-            out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '" target="_blank">Visit Sketchfab</a>');
+            out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '"target="_blank">Visit Sketchfab</a>');
             out.push('<br><b>Bibliography: </b>' + f.properties.Bibliography);
             l.bindPopup(out.join("<br />"));
         }
