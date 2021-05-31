@@ -1,2 +1,30 @@
 <h1>Digital Finiq</h>
 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zJFR-6mpYaDyj6S6FLBNNgaPJ-8BkH-P" width="640" height="480"></iframe>
+<!doctype html> <!-- This says your file is in .html -->
+<html lang="en">
+ <!-- This says your file is in English -->
+
+<head>
+    <!-- This opens your header. Your header is where different libraries and plugins are loaded -->
+    <meta charset="utf-8">
+    <title>Digital Finiq</title> <!-- Put the title of your map here -->
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!-- Load Leaflet files locally -->
+    <link rel="stylesheet" href="./leaflet/leaflet.css" /> <!--Put the path to the leaflet.css  you downloaded here -->
+    <script src="./leaflet/leaflet.js"></script>  <!-- Put the path to the leaflet.js you downloaded here -->
+
+
+    <script src="./infoPoints.js"></script>
+    <script src="./paths.js"></script>
+    <script src="./houseOfTwoPeristyles.js"></script>
+    <script src="./places.js"></script>
+
+</head>
+
+<!-- In the body of the code, you need to create the division on the page for your map and call the map.js file you will make next -->
+<body>
+    <div id="map" style="width:900px; height:580px;"></div> <!--set the size of your map -->
+    <script type="text/javascript" src="digitalfiniq.js"></script> <!--call the javascript file for your map -->
+</body>
+</html>
