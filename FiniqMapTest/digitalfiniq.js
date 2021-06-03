@@ -76,14 +76,14 @@ map.addLayer(houseImported);
 
     L.control.layers(baseLayers, clusterLayers).addTo(map);
 
-function onLocationFound(e) {
-    var radius = e.accuracy;
+	function onLocationFound(e) {
+		var radius = e.accuracy / 2;
 
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("You are here").openPopup();
+		L.marker(e.latlng).addTo(map)
+			.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-    L.circle(e.latlng, radius).addTo(map);
-}
+		L.circle(e.latlng, radius).addTo(map);
+	}
 
 map.on('locationfound', onLocationFound);
 
