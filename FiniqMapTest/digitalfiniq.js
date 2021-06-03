@@ -85,7 +85,11 @@ map.addLayer(houseImported);
 		L.circle(e.latlng, radius).addTo(map);
 	}
 
-map.on('locationfound', onLocationFound);
+	function onLocationError(e) {
+		alert(e.message);
+	}
 
-map.locate({setView: true, maxZoom: 16});
+	map.on('locationfound', onLocationFound);
+	map.on('locationerror', onLocationError);
 
+	map.locate({setView: true, maxZoom: 16});
