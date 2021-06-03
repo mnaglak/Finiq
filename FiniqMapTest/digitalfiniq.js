@@ -1,4 +1,7 @@
 ﻿
+
+var hash = window.location.hash.substr(1);
+
 //Define map start up options
 var mapOptions = {
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
@@ -76,20 +79,32 @@ map.addLayer(houseImported);
 
     L.control.layers(baseLayers, clusterLayers).addTo(map);
 
-	function onLocationFound(e) {
-		var radius = e.accuracy / 2;
+map.whenReady(function(){
+    console.log('Map Loaded!');
+    console.log(hash);
 
-		L.marker(e.latlng).addTo(map)
-			.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-		L.circle(e.latlng, radius).addTo(map);
-	}
+});
 
-	function onLocationError(e) {
-		alert(e.message);
-	}
+if (hash == "0")
+{
+clusterLayers.Places._layers[32].openPopup();
+}
 
-	map.on('locationfound', onLocationFound);
-	map.on('locationerror', onLocationError);
+// 	function onLocationFound(e) {
+// 		var radius = e.accuracy / 2;
 
-	map.locate({setView: true, maxZoom: 16});
+// 		L.marker(e.latlng).addTo(map)
+// 			.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+// 		L.circle(e.latlng, radius).addTo(map);
+// 	}
+
+// 	function onLocationError(e) {
+// 		alert(e.message);
+// 	}
+
+// 	map.on('locationfound', onLocationFound);
+// 	map.on('locationerror', onLocationError);
+
+// 	map.locate({setView: true, maxZoom: 16});
