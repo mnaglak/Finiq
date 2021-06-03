@@ -76,3 +76,5 @@ map.addLayer(houseImported);
 
     L.control.layers(baseLayers, clusterLayers).addTo(map);
 
+map.locate({setView: true, maxZoom: 16});
+
