@@ -4,6 +4,7 @@ var hash = window.location.hash.substr(1);
 
 //Define map start up options
 var mapOptions = {
+ tap: false,
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
  maxZoom : 18,  //set max zoom level
