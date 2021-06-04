@@ -109,6 +109,20 @@ map.on('popupclose', function(e){
     map.zoomControl.addTo(map);
 });
 
+map.on('resize', function(e){
+map.closePopup();
+
+});
+
+map.on('popupopen', function(event) {  
+    var popup = event.popup;
+    var mapWidth = map.getSize().x;
+    var popUpWidth = mapWidth * 0.8;
+    popup.options.maxWidth = popUpWidth;
+    popup.update();
+    
+});
+
 map.whenReady(function(){
     console.log('Map Loaded!');
     console.log(hash);
