@@ -82,12 +82,21 @@ map.addLayer(houseImported);
     };
 
 
-    L.control.layers(baseLayers, clusterLayers).addTo(map);
+  var controls =  L.control.layers(baseLayers, clusterLayers).addTo(map);
+
+map.on('popupopen', function(e){
+    map.dragging.disable()
+    map.removeControl(controls);
+});
+
+map.on('popupclose', function(e){
+    map.dragging.enable();
+    map.addControl(controls);
+});
 
 map.whenReady(function(){
     console.log('Map Loaded!');
     console.log(hash);
-
 
 });
 
