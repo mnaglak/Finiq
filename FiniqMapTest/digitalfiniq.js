@@ -6,8 +6,14 @@ var hash = window.location.hash.substr(1);
 var mapOptions = {
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
- maxZoom : 24,  //set max zoom level
- minZoom : 1,
+ maxZoom : 18,  //set max zoom level
+ minZoom : 14,
+ maxBounds: [
+        //south west
+        [39.90844802793145, 20.03472901279505],
+        //north east
+        [39.92151290986558, 20.079004232431558]
+        ],
  }
 
 var sfLink = 'https://sketchfab.com/3d-models/archaeology-in-action-546273d5fd4b4625ad61f8837c9fcfc2';
