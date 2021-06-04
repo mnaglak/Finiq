@@ -69,7 +69,7 @@ map.addLayer(houseImported);
             out.push('<br><b>Research: </b>' + f.properties.Research);
             out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '"target="_blank">Visit Sketchfab</a>');
             out.push('<br><b>Bibliography: </b>' + f.properties.Bibliography);
-            l.bindPopup(out.join("<br />"), {maxHeight: 200, maxWidth: popUpWidth, closeOnClick: true});
+            l.bindPopup(out.join("<br />"), {maxHeight: 160, maxWidth: popUpWidth, closeOnClick: true});
         }
     }
 
