@@ -87,11 +87,23 @@ map.addLayer(houseImported);
 map.on('popupopen', function(e){
     map.dragging.disable()
     map.removeControl(controls);
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+    map.zoomControl.remove();
 });
 
 map.on('popupclose', function(e){
     map.dragging.enable();
     map.addControl(controls);
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
+    map.zoomControl.addTo(map);
 });
 
 map.whenReady(function(){
