@@ -115,7 +115,7 @@ map.on('popupopen', function(event) {
 
 map.whenReady(function(){
 console.log(hash);
-console.log(clusterLayers.Places);
+console.log(clusterLayers.Information Points);
 
  if (hash == "0")
 {
