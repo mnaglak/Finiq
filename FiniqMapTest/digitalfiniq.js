@@ -40,7 +40,6 @@ var houseImported = L.geoJSON(houseOfTwoPeristyles);
 
 Esri_WorldImagery.addTo(map);
 // map.addLayer(infoPointsImported);
-map.addLayer(placesImported);
 map.addLayer(pathsImported);
 map.addLayer(houseImported);
 
@@ -48,28 +47,22 @@ map.addLayer(houseImported);
 
 
 //Create popUp box function
-    function popUpInfo(f,l) {
-        var out = [];
-        if (f.properties) {
-            out.push('<b>Name: </b>' + f.properties.Name);
-            out.push('<br><b>Description: </b>' + f.properties.description);
-            l.bindPopup(out.join("<br />"));
-        }
-    }
 
-    function popUpPlaces(f,l) {
+       function popUpPlaces(f,l) {
         var out = [];
+        //console.log(out);
         var mapWidth = map.getSize().x;
         var popUpWidth = mapWidth * 0.8;
+        //console.log("map width = " + mapWidth);
         if (f.properties) {
             out.push('<b>Name: </b>' + f.properties.Name);
-            out.push('<br><b>Type: </b>' + f.properties.Type);
-            out.push('<br><b>Description: </b>' + f.properties.description);
-            out.push('<br><b>Date Built: </b>' + f.properties.Date_built);
-            out.push('<br><b>Research: </b>' + f.properties.Research);
+            out.push('<br><b>Date: </b>' + f.properties.Date);
+            out.push('<br><b>Description: </b>' + f.properties.Description);
+            out.push('<br><b>More Information: </b>' + f.properties.More);
+            out.push('<br><b>Historical Context: </b>' + f.properties.Hist);
             out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '"target="_blank">Visit Sketchfab</a>');
             out.push('<br><b>Bibliography: </b>' + f.properties.Bibliography);
-            l.bindPopup(out.join("<br />"), {maxHeight: 160, maxWidth: popUpWidth, closeOnClick: true});
+            l.bindPopup(out.join("<br />"), {maxHeight: 200, maxWidth: popUpWidth, closeOnClick: true});
         }
     }
 
