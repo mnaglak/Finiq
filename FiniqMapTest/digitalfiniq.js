@@ -115,11 +115,10 @@ map.on('popupopen', function(event) {
 
 map.whenReady(function(){
 console.log(hash);
-console.log(clusterLayers.Information Points);
 
  if (hash == "0")
 {
- clusterLayers.Information Points._layers[28].openPopup();
+placesImported._layers[28].openPopup();
  console.log("read hash");
 }
 
