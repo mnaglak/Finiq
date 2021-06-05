@@ -119,7 +119,7 @@ console.log(clusterLayers.Places);
 
  if (hash == "0")
 {
-clusterLayers.Places._layers[28].openPopup();
+//clusterLayers.Places._layers[28].openPopup();
  console.log("read hash");
 }
 
