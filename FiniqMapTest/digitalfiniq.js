@@ -31,8 +31,23 @@ var placesImported = L.geoJSON(places, {
         onEachFeature: popUpPlaces
     });
  
-var pathsImported = L.geoJSON(paths);
-var houseImported = L.geoJSON(houseOfTwoPeristyles);
+var pathsImported = L.geoJSON(paths, {
+    style: {
+        color: "#D38715",
+        opacity: 0.6,
+        fillOpacity: 0,
+        dashArray: '8, 6'
+    }
+    });
+
+var houseImported = L.geoJSON(houseOfTwoPeristyles, {
+    style: {
+        color: "#42FFF4",
+        opacity: 0.6,
+        fillOpacity: 0
+    }
+    });
+
    
 
 Esri_WorldImagery.addTo(map);
