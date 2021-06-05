@@ -44,9 +44,9 @@ var pathsImported = L.geoJSON(paths, {
 
 var houseImported = L.geoJSON(houseOfTwoPeristyles, {
     style: {
-        color: "grey",
-        opacity: 0.6,
-        fillOpacity: 0
+        color: "#4B4B4B",
+        opacity: 1,
+        fillOpacity: .7
     }
     });
 
