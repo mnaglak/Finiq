@@ -114,15 +114,16 @@ map.on('popupopen', function(event) {
 });
 
 map.whenReady(function(){
-    console.log('Map Loaded!');
-    console.log(hash);
 
-});
 
 if (hash == "0")
 {
-clusterLayers.Places._layers[32].openPopup();
+clusterLayers.Places._layers[28].openPopup();
+
 }
+
+    
+});
 
 // 	function onLocationFound(e) {
 // 		var radius = e.accuracy / 2;
