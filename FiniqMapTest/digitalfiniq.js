@@ -116,14 +116,16 @@ map.on('popupopen', function(event) {
 map.whenReady(function(){
 
 
-if (hash == "0")
-{
-clusterLayers.Places._layers[28].openPopup();
+
 
 }
 
     
 });
+
+if (hash == "0")
+{
+clusterLayers.Places._layers[28].openPopup();
 
 // 	function onLocationFound(e) {
 // 		var radius = e.accuracy / 2;
