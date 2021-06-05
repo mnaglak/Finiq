@@ -26,9 +26,9 @@ var map = new L.map('map', mapOptions);
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
 
-var infoPointsImported = L.geoJSON(infoPoints, {
-        onEachFeature: popUpInfo
-    });
+// var infoPointsImported = L.geoJSON(infoPoints, {
+//         onEachFeature: popUpInfo
+//     });
 
 var placesImported = L.geoJSON(places, {
         onEachFeature: popUpPlaces
@@ -39,9 +39,9 @@ var houseImported = L.geoJSON(houseOfTwoPeristyles);
    
 
 Esri_WorldImagery.addTo(map);
-map.addLayer(infoPointsImported);
+// map.addLayer(infoPointsImported);
 map.addLayer(placesImported);
-pathsImported.addTo(map);
+map.addLayer(pathsImported);
 map.addLayer(houseImported);
 
 
@@ -79,9 +79,9 @@ map.addLayer(houseImported);
     };
 
     var clusterLayers = {
-        "Places" : placesImported,
-        "Info Points" : infoPointsImported,
-        "House of the Two Peristyles" : houseImported
+        "Information Points" : placesImported,
+         "Walking Path" : pathsImported,
+        "Ancient Buildings" : houseImported
     };
 
 
