@@ -117,13 +117,15 @@ map.whenReady(function(){
 console.log(hash);
 console.log(clusterLayers.Places);
 
+ if (hash == "0")
+{
+clusterLayers.Places._layers[28].openPopup();
+ console.log("read hash");
+}
 
 });
 
-if (hash == "0")
-{
-clusterLayers.Places._layers[28].openPopup();
-}
+
 
 // 	function onLocationFound(e) {
 // 		var radius = e.accuracy / 2;
