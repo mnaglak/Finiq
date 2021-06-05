@@ -7,8 +7,8 @@ var mapOptions = {
  tap: false,
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
- maxZoom : 18,  //set max zoom level
- minZoom : 15,
+ maxZoom : 17,  //set max zoom level
+ minZoom : 14,
  maxBounds: [
         //south west
         [39.89647938421925, 20.025306003120978],
