@@ -114,13 +114,10 @@ map.on('popupopen', function(event) {
 });
 
 map.whenReady(function(){
+console.log(hash);
+console.log(clusterLayers.Places);
 
-
-
-
-}
-
-    
+}   
 });
 
 if (hash == "0")
