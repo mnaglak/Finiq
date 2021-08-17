@@ -142,21 +142,27 @@ placesImported._layers[28].openPopup();
 });
 
 
+placeholders for the L.marker and L.circle representing user's current position   
+var current_position
 
-// 	function onLocationFound(e) {
-// 		var radius = e.accuracy / 2;
+function onLocationFound(e) {
+   // if position defined, then remove the existing position circle from the map
+   if (current_position) {
+       map.removeLayer(current_position);
+   }
+   
+   current_position = L.circle(e.latlng, 10).addTo(map);
+   current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
 
-// 		L.marker(e.latlng).addTo(map)
-// 			.bindPopup("You are within " + radius + " meters from this point").openPopup();
+ 
+ }
 
-// 		L.circle(e.latlng, radius).addTo(map);
-// 	}
+ function onLocationError(e) {
+     alert(e.message);
+ }
 
-// 	function onLocationError(e) {
-// 		alert(e.message);
-// 	}
+ map.on('locationfound', onLocationFound);
+ map.on('locationerror', onLocationError);
 
-// 	map.on('locationfound', onLocationFound);
-// 	map.on('locationerror', onLocationError);
+map.locate({ setView: false, watch: true });
 
-// 	map.locate({setView: true, maxZoom: 16});
