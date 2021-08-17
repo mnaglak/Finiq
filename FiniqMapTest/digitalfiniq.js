@@ -155,9 +155,7 @@ function onLocationFound(e) {
    
    current_position = L.circle(e.latlng, 10).addTo(map);
    current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
- alert("location");
 
- 
  }
 
  function onLocationError(e) {
