@@ -1,6 +1,8 @@
 ﻿
-
 var hash = window.location.hash.substr(1);
+
+
+
 
 //Define map start up options
 var mapOptions = {
@@ -11,9 +13,9 @@ var mapOptions = {
  minZoom : 14,
  maxBounds: [
         //south west
-        [39.89647938421925, 20.025306003120978],
+        [39.90844802793145, 20.03472901279505],
         //north east
-        [39.928943892224005, 20.096501788379104]
+        [39.92151290986558, 20.079004232431558]
         ],
  }
 
@@ -21,6 +23,10 @@ var sfLink = 'https://sketchfab.com/3d-models/archaeology-in-action-546273d5fd4b
 
 //Creates map object according to map options
 var map = new L.map('map', mapOptions);
+//var placeMarkers = new Array();
+
+
+
 
 //Example of an externally called basemap
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -29,45 +35,70 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
 
 
+
 var placesImported = L.geoJSON(places, {
         onEachFeature: popUpPlaces
     });
- 
+
 var pathsImported = L.geoJSON(paths, {
     style: {
-        color: "#D38715",
-        opacity: 0.6,
-        fillOpacity: 0,
+        //color: "#D38715",
+        color: "silver",
+        weight: 5,
+        opacity: 1,
+        fillOpacity: .8,
         dashArray: '8, 6'
     }
     });
 
-var houseImported = L.geoJSON(houseOfTwoPeristyles, {
-    style: {
-        color: "#4B4B4B",
-        opacity: 1,
-        fillOpacity: .7
-    }
-    });
+//var houseImported = L.geoJSON(houseOfTwoPeristyles, {
+//    style: {
+//        color: "#4B4B4B",
+//        opacity: 1,
+//        fillOpacity: .7
+//    }
+//    });
 
+var wallsImported = L.geoJSON(walls, {
+    style: {
+        color: "black",
+        opacity: 0.5,
+        fillOpacity: 0
+    
+    }
+});
+
+var streetsImported = L.geoJSON(streets, {
+    style: {
+        color: "grey",
+        opacity: 0.8,
+        fillOpacity: 0
+
+    }
+});
    
 
 Esri_WorldImagery.addTo(map);
 map.addLayer(placesImported);
+//map.addLayer(houseImported);
+map.addLayer(wallsImported);
+map.addLayer(streetsImported);
 map.addLayer(pathsImported);
-map.addLayer(houseImported);
+
+
 
 
 
 
 //Create popUp box function
 
-       function popUpPlaces(f,l) {
+    
+
+
+    function popUpPlaces(f,l) {
         var out = [];
-        //console.log(out);
         var mapWidth = map.getSize().x;
         var popUpWidth = mapWidth * 0.8;
-        //console.log("map width = " + mapWidth);
         if (f.properties) {
             out.push('<b>Name: </b>' + f.properties.Name);
             out.push('<br><b>Date: </b>' + f.properties.Date);
@@ -75,7 +106,7 @@ map.addLayer(houseImported);
             out.push('<br><b>More Information: </b>' + f.properties.More);
             out.push('<br><b>Historical Context: </b>' + f.properties.Hist);
             out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '"target="_blank">Visit Sketchfab</a>');
-            out.push('<br><b>Bibliography: </b>' + f.properties.Bibliography);
+            out.push('<br><b>Select Bibliography: </b>' + f.properties.Bibliography);
             l.bindPopup(out.join("<br />"), {maxHeight: 200, maxWidth: popUpWidth, closeOnClick: true});
         }
     }
@@ -86,9 +117,11 @@ map.addLayer(houseImported);
     };
 
     var clusterLayers = {
-        "Information Points" : placesImported,
+        //"Information Points" : placesImported,
          "Walking Path" : pathsImported,
-        "Ancient Buildings" : houseImported
+        //"Ancient Buildings": houseImported,
+        "Ancient Walls": wallsImported,
+        "Ancient Streets": streetsImported
     };
 
 
@@ -116,6 +149,7 @@ map.on('popupclose', function(e){
     map.zoomControl.addTo(map);
 });
 
+
 map.on('resize', function(e){
 map.closePopup();
 
@@ -130,38 +164,44 @@ map.on('popupopen', function(event) {
     
 });
 
-map.whenReady(function(){
-console.log(hash);
 
- if (hash == "0")
+
+    
+
+map.whenReady(function(){
+console.log(placesImported);
+
+if (hash == "0")
 {
 placesImported._layers[28].openPopup();
- console.log("read hash");
+
 }
 
+    
 });
 
 
-// placeholders for the L.marker and L.circle representing user's current position   
-var current_position
+// placeholders for the L.marker and L.circle representing user's current position  
+//var current_position
 
-function onLocationFound(e) {
-   // if position defined, then remove the existing position circle from the map
-   if (current_position) {
-       map.removeLayer(current_position);
-   }
-   
-   current_position = L.circle(e.latlng, 10).addTo(map);
-   current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
+//function onLocationFound(e) {
+//    // if position defined, then remove the existing position circle from the map
+//    if (current_position) {
+//        map.removeLayer(current_position);
+//    }
 
- }
+//    current_position = L.circle(e.latlng, 10).addTo(map);
+//    current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
 
- function onLocationError(e) {
-     alert(e.message);
- }
 
- map.on('locationfound', onLocationFound);
- map.on('locationerror', onLocationError);
+//  }
 
-map.locate({ setView: false, watch: true });
+//  function onLocationError(e) {
+//      alert(e.message);
+//  }
+
+//  map.on('locationfound', onLocationFound);
+//  map.on('locationerror', onLocationError);
+
+//map.locate({ setView: false, watch: true });
 
