@@ -11,12 +11,13 @@
     <!-- Load Leaflet files locally -->
     <link rel="stylesheet" href="./leaflet/leaflet.css" /> <!--Put the path to the leaflet.css  you downloaded here -->
     <script src="./leaflet/leaflet.js"></script>  <!-- Put the path to the leaflet.js you downloaded here -->
-    <script src="./infoPoints.js"></script>
     <script src="./paths.js"></script>
     <script src="./houseOfTwoPeristyles.js"></script>
     <script src="./places.js"></script>
+    <script src="./placesAL.js"></script>
     <script src="./walls.js"></script>
     <script src="./streets.js"></script>
+    <script src="./entrance.js"></script>
     <style>
 
         body {
@@ -28,19 +29,34 @@
             height: 100%;
             width: 100vw;
         }
+        select {
+            z-index: 1000;
+            position: absolute;
+            bottom: 35px;
+            left: 1px;
+            padding: 5px;
+            background: white;
+        }
     </style>
 </head>
 
-<!--<script>
-    document.addEventListener('touchmove',
-        function(e) {
-            e.preventDefault();
-        }, {passive:false});
-</script>-->
+
 
 <!-- In the body of the code, you need to create the division on the page for your map and call the map.js file you will make next -->
 <body>
-    <div id="map"></div> <!--set the size of your map -->
+    <div id="map">
+        <select id="languages">
+            <option value="en">English</option>
+            <option value="al">Albanian</option>
+        </select>
+    </div> <!--set the size of your map -->
     <script type="text/javascript" src="digitalfiniq.js"></script> <!--call the javascript file for your map -->
+    <script>document
+            .getElementById('languages')
+            .addEventListener('change', event => {
+                const language = event.target.value;
+                changeLanguage(language);
+            });</script>
 </body>
 </html>
+
