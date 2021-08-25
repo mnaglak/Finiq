@@ -62,25 +62,27 @@ var pathsImported = L.geoJSON(paths, {
 
 var houseImported = L.geoJSON(houseOfTwoPeristyles, {
     style: {
-        color: "#4B4B4B",
+        color: "black",
         opacity: 1,
-        fillOpacity: .7
+        fillOpacity: .3
     }
     });
 
 var wallsImported = L.geoJSON(walls, {
     style: {
+        weight: 10,
         color: "black",
-        opacity: 0.5,
-        fillOpacity: 0
+        opacity: 0.8,
+    
     
     }
 });
 
 var streetsImported = L.geoJSON(streets, {
     style: {
-        color: "grey",
-        opacity: 0.8,
+        weight: 5,
+        color: "white",
+        opacity: 0.4,
         fillOpacity: 0
 
     }
@@ -105,7 +107,7 @@ Esri_WorldImagery.addTo(map);
 map.addLayer(placesImported);
 map.addLayer(houseImported);
 map.addLayer(wallsImported);
-map.addLayer(streetsImported);
+//map.addLayer(streetsImported);
 map.addLayer(pathsImported);
 entranceMarker = new L.Marker([39.91351259783837, 20.059624328713472], { icon: infoIcon }).bindPopup(entrancePopup, { maxHeight: 200, maxWidth: 200, closeOnClick: true }).addTo(map);
 
@@ -217,7 +219,31 @@ map.on('popupopen', function(event) {
     popup.options.maxWidth = popUpWidth;
     popup.update();
 });
-    
+
+//var customControl = L.Control.extend({
+//    options: {
+//        position: 'bottomleft'
+//    },
+
+//    onAdd: function (map) {
+//        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+//        container.style.backgroundColor = 'white';
+//        container.style.backgroundImage = "url(http://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
+//        container.style.backgroundSize = "30px 30px";
+//        container.style.width = '30px';
+//        container.style.height = '30px';
+
+//        container.onclick = function () {
+//            console.log('buttonClicked');
+//        }
+
+//        return container;
+//    }
+//});
+
+//map.addControl(new customControl());
+
 
 map.whenReady(function(){
 console.log(placesImported);
