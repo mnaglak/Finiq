@@ -15,7 +15,7 @@ var mapOptions = {
         //south west
         [39.90844802793145, 20.03472901279505],
         //north east
-        [39.92151290986558, 20.079004232431558]
+        [39.93, 20.079004232431558]
         ],
  }
 
@@ -26,7 +26,12 @@ var map = new L.map('map', mapOptions);
 //var placeMarkers = new Array();
 
 var mapWidth = map.getSize().x;
+var mapHeight = map.getSize().y;
 var popUpWidth = mapWidth * 0.8;
+var popUpHeight = mapHeight * 0.6;
+var imageWidth = popUpWidth * 0.8;
+var imageHeight = imageWidth * 0.6;
+
 
 
 //Example of an externally called basemap
@@ -92,11 +97,9 @@ var infoIcon = L.icon({
     iconUrl: 'info.png',
     //shadowUrl: 'info.png',
 
-    iconSize: [150, 50], // size of the icon
-    //shadowSize: [50, 64], // size of the shadow
-    iconAnchor: [0, 25], // point of the icon which will correspond to marker's location
-    //shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor: [75, -25] // point from which the popup should open relative to the iconAnchor
+    iconSize: [150, 75], // size of the icon
+    iconAnchor: [75, 100], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -25] // point from which the popup should open relative to the iconAnchor
 });
  
 var entrancePopup = "<center><b>Ancient Finiq</b></center><br>A paragraph of information giving an overview of the city";
@@ -107,7 +110,8 @@ Esri_WorldImagery.addTo(map);
 map.addLayer(placesImported);
 map.addLayer(houseImported);
 map.addLayer(wallsImported);
-//map.addLayer(streetsImported);
+
+
 map.addLayer(pathsImported);
 entranceMarker = new L.Marker([39.91351259783837, 20.059624328713472], { icon: infoIcon }).bindPopup(entrancePopup, { maxHeight: 200, maxWidth: 200, closeOnClick: true }).addTo(map);
 
@@ -131,38 +135,37 @@ function changeLanguage(lang) {
 }
 
 
-
-
-
 //Create popUp box function
 
-    
-
+   
 
     function popUpPlaces(f,l) {
         var out = [];
-        //var mapWidth = map.getSize().x;
-        //var popUpWidth = mapWidth * 0.8;
         if (f.properties) {
             out.push('<b>Name: </b>' + f.properties.Name);
             out.push('<br><b>Date: </b>' + f.properties.Date);
             out.push('<br><b>Description: </b>' + f.properties.Descriptio);
             out.push('<br><b>More Information: </b>' + f.properties.More);
             out.push('<br><b>Historical Context: </b>' + f.properties.Hist);
-            out.push('<br><b>3D model: </b>' + '<a href="' + sfLink + '"target="_blank">Visit Sketchfab</a>');
-            out.push('<br><b>Select Bibliography: </b>' + f.properties.Bibliography);
-            l.bindPopup(out.join("<br />"), {maxHeight: 200, maxWidth: popUpWidth, closeOnClick: true});
+            if (f.properties.ThreeD) {
+                out.push('<br><b>3D model: </b>' + '<a href="' + f.properties.ThreeD + '"target="_blank">Visit Sketchfab</a>');
+            }
+            out.push('<br><b>Select Bibliography: </b>' + f.properties.Biblio);
+            if (f.properties.image)
+            {
+                out.push('<br><center><img src ="' + f.properties.image + '.png" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + f.properties.caption + '</center>');
+            }
+            l.bindPopup(out.join("<br />"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
+          
         }
     }
 
 function popUpEntrance(f, l) {
     var out = [];
-    var mapWidth = map.getSize().x;
-    var popUpWidth = mapWidth * 0.8;
     if (f.properties) {
         out.push('<center><b>Ancient Finiq</b></center>');
         out.push('Overview of ancient Finiq....');
-        l.bindPopup(out.join("<br />"), { maxHeight: 200, maxWidth: popUpWidth, closeOnClick: true });
+        l.bindPopup(out.join("<br />"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
     }
 }
 
@@ -211,38 +214,23 @@ map.closePopup();
 });
 
 
-//CAN BE COMBINED WITH FUNCTION ABOVE????
+
 map.on('popupopen', function(event) {  
     var popup = event.popup;
     var mapWidth = map.getSize().x;
+    var mapHeight = map.getSize().y;
     var popUpWidth = mapWidth * 0.8;
+    var popUpHeight = mapHeight * 0.6;
+    var imageWidth = popUpWidth * 0.8;
+    var imageHeight = imageWidth * 0.6;
     popup.options.maxWidth = popUpWidth;
+    popup.options.maxHeight = popUpHeight;
     popup.update();
+    console.log(popUpWidth);
+    console.log(popUpHeight);
+    console.log(imageWidth);
+    console.log(imageHeight);
 });
-
-//var customControl = L.Control.extend({
-//    options: {
-//        position: 'bottomleft'
-//    },
-
-//    onAdd: function (map) {
-//        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-
-//        container.style.backgroundColor = 'white';
-//        container.style.backgroundImage = "url(http://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
-//        container.style.backgroundSize = "30px 30px";
-//        container.style.width = '30px';
-//        container.style.height = '30px';
-
-//        container.onclick = function () {
-//            console.log('buttonClicked');
-//        }
-
-//        return container;
-//    }
-//});
-
-//map.addControl(new customControl());
 
 
 map.whenReady(function(){
@@ -252,6 +240,7 @@ if (hash == "0")
 {
     placesImported._layers[28].openPopup();
 }
+
 
     
 });
@@ -281,3 +270,27 @@ if (hash == "0")
 
 //map.locate({ setView: false, watch: true });
 
+
+//var customControl = L.Control.extend({
+//    options: {
+//        position: 'bottomleft'
+//    },
+
+//    onAdd: function (map) {
+//        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+//        container.style.backgroundColor = 'white';
+//        container.style.backgroundImage = "url(http://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
+//        container.style.backgroundSize = "30px 30px";
+//        container.style.width = '30px';
+//        container.style.height = '30px';
+
+//        container.onclick = function () {
+//            console.log('buttonClicked');
+//        }
+
+//        return container;
+//    }
+//});
+
+//map.addControl(new customControl());
