@@ -11,7 +11,7 @@ var mapOptions = {
  zoom: 16, //set initial zoom level
  maxZoom : 20,  //set max zoom level
  minZoom: 14,
- touchZoom: false,
+ touchZoom: true,
  maxBounds: [
         //south west
         [39.90844802793145, 20.03472901279505],
