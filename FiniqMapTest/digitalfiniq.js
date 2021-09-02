@@ -1,4 +1,4 @@
-﻿
+
 var hash = window.location.hash.substr(1);
 
   
@@ -10,7 +10,8 @@ var mapOptions = {
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
  maxZoom : 20,  //set max zoom level
- minZoom : 14,
+ minZoom: 14,
+ touchZoom: false,
  maxBounds: [
         //south west
         [39.90844802793145, 20.03472901279505],
