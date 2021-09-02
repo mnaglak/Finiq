@@ -7,7 +7,7 @@
     <!-- This opens your header. Your header is where different libraries and plugins are loaded -->
     <title>Digital Finiq</title> <!-- Put the title of your map here -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Load Leaflet files locally -->
     <link rel="stylesheet" href="./leaflet/leaflet.css" /> <!--Put the path to the leaflet.css  you downloaded here -->
@@ -21,14 +21,16 @@
     <script src="./entrance.js"></script>
     <style>
 
-        body {
-            padding: 0;
+        html, body {
+            height: 100%;
             margin: 0;
+            padding: 0,
+            position: fixed;
         }
 
-        html, body, #map {
+        #map {
+            width: 100%;
             height: 100%;
-            width: 100vw;
         }
 
         select {
@@ -41,10 +43,28 @@
             color: white;
             font-size: 18px;
         }
-
     </style>
-</head>
 
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #map {
+            height: 100%;
+            width: 100vw;
+        }
+    </style>
+
+    <style type="text/css" media="screen">
+        html {
+            -webkit-text-size-adjust: none;
+            touch-action: none; /*prevent user scaling*/
+        }
+    </style>
+
+</head>
 
 
 <!-- In the body of the code, you need to create the division on the page for your map and call the map.js file you will make next -->
