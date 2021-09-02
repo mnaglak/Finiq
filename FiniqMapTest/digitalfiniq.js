@@ -155,13 +155,15 @@ function changeLanguage(lang) {
             if (f.properties.ThreeD) {
                 out.push('<br><b>3D model: </b>' + '<a href="' + f.properties.ThreeD + '"target="_blank">Visit Sketchfab</a>');
             }
-            out.push('<br><b>Select Bibliography: </b>' + f.properties.Biblio);
-            if (f.properties.image)
-            {
-                myImage = images[f.properties.image];
-                out.push('<br><center><img src ="' + myImage + '" width ="' + myImageW + '" height ="' + myImageH + '" > <br>' + f.properties.caption + '</center>');      
-            }
-            l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true});
+            out.push('<br><b>Select Bibliography: </b><center>' + f.properties.Biblio + '<br>');
+            //if (f.properties.image)
+            //{
+            //    console.log(myImageW);
+            //    myImage = images[f.properties.image];
+            //    out.push('<br><center><img src ="' + myImage + '" width ="' + myImageW + '" height ="' + myImageH + '" > <br>' + f.properties.caption + '</center>');      
+            //}
+
+            l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
             
         }
     }
@@ -210,13 +212,6 @@ map.on('popupclose', function(e){
 map.on('resize', function(e){
     map.closePopup();
     resized = true;
-
-    //if (english == true) {
-    //    changeLanguage("en");
-    //}
-    //else {
-    //    changeLanguage("al");
-    //}
 });
 
 
@@ -232,12 +227,15 @@ map.on('popupopen', function (event) {
     map.zoomControl.remove();
 
     var popup = event.popup;
-  
-
-
-    var layer = event.popup._source;
-    var feature = layer.feature;
+    var marker = popup._source;
+    var content = popup.getContent();
+    var imageUpdate = images[marker.feature.properties.image];
+    var captionUpdate = marker.feature.properties.caption;
+    var oldImageStart = content.indexOf('<c');
+    var originalContent = content.substring(0, oldImageStart);
     
+   
+
     mapWidth = map.getSize().x;
     mapHeight = map.getSize().y;
     popUpWidth = mapWidth * 0.8;
@@ -248,16 +246,21 @@ map.on('popupopen', function (event) {
     popup.options.maxHeight = popUpHeight;
     popup.update();
 
-
-    console.log(feature);
-    layer.unbindPopup(popup);
-    popUpPlaces(feature, layer);
   
-       
+
+    var imageHTML = '<center><br><img src ="' + imageUpdate + '" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + captionUpdate + '</center>'
+    marker._popup.setContent(originalContent + imageHTML);
+   
+
+
     
-    //console.log(popUpWidth);
-    //console.log(popUpHeight);
-    //console.log(popup);
+
+
+    //console.log(feature);
+    //layer.unbindPopup(popup);
+    //popUpPlaces(feature, layer);
+
+
     });
 
     
