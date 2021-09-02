@@ -229,13 +229,10 @@ map.on('popupopen', function (event) {
     var popup = event.popup;
     var marker = popup._source;
     var content = popup.getContent();
-    var imageUpdate = images[marker.feature.properties.image];
-    var captionUpdate = marker.feature.properties.caption;
     var oldImageStart = content.indexOf('<c');
     var originalContent = content.substring(0, oldImageStart);
-    
-   
 
+  
     mapWidth = map.getSize().x;
     mapHeight = map.getSize().y;
     popUpWidth = mapWidth * 0.8;
@@ -246,13 +243,14 @@ map.on('popupopen', function (event) {
     popup.options.maxHeight = popUpHeight;
     popup.update();
 
-  
-
-    var imageHTML = '<center><br><img src ="' + imageUpdate + '" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + captionUpdate + '</center>'
-    marker._popup.setContent(originalContent + imageHTML);
+    if (marker != entranceMarker && marker != entranceMarkerAL) {
+        var imageUpdate = images[marker.feature.properties.image];
+        var captionUpdate = marker.feature.properties.caption;
+        var imageHTML = '<center><br><img src ="' + imageUpdate + '" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + captionUpdate + '</center>'
+        marker._popup.setContent(originalContent + imageHTML);
+    }
    
-
-
+   
     
 
 
