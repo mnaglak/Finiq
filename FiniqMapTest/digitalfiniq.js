@@ -31,6 +31,8 @@ var popUpWidth = mapWidth * 0.8;
 var popUpHeight = mapHeight * 0.6;
 var imageWidth = popUpWidth * 0.8;
 var imageHeight = imageWidth * 0.6;
+var images = [null, "image1.png", "image2.png", "image3.png"];
+var currentImage = null;
 
 
 
@@ -141,6 +143,9 @@ function changeLanguage(lang) {
 
     function popUpPlaces(f,l) {
         var out = [];
+        var myImage;
+        var myImageW = imageWidth;
+        var myImageH = imageHeight;
         if (f.properties) {
             out.push('<b>Name: </b>' + f.properties.Name);
             out.push('<br><b>Date: </b>' + f.properties.Date);
@@ -153,19 +158,21 @@ function changeLanguage(lang) {
             out.push('<br><b>Select Bibliography: </b>' + f.properties.Biblio);
             if (f.properties.image)
             {
-                out.push('<br><center><img src ="' + f.properties.image + '.png" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + f.properties.caption + '</center>');
+                myImage = images[f.properties.image];
+                out.push('<br><center><img src ="' + myImage + '" width ="' + myImageW + '" height ="' + myImageH + '" > <br>' + f.properties.caption + '</center>');      
             }
-            l.bindPopup(out.join("<br />"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
-          
+            l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true});
+            
         }
     }
+
 
 function popUpEntrance(f, l) {
     var out = [];
     if (f.properties) {
         out.push('<center><b>Ancient Finiq</b></center>');
         out.push('Overview of ancient Finiq....');
-        l.bindPopup(out.join("<br />"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
+        l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
     }
 }
 
@@ -175,8 +182,7 @@ function popUpEntrance(f, l) {
     };
 
     var clusterLayers = {
-        //"Information Points" : placesImported,
-         "Walking Path" : pathsImported,
+        "Walking Path" : pathsImported,
         "Ancient Buildings": houseImported,
         "Ancient Walls": wallsImported,
         "Ancient Streets": streetsImported
@@ -185,16 +191,7 @@ function popUpEntrance(f, l) {
 
   var controls =  L.control.layers(baseLayers, clusterLayers).addTo(map);
 
-map.on('popupopen', function(e){
-    map.dragging.disable()
-    map.removeControl(controls);
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
-    map.boxZoom.disable();
-    map.keyboard.disable();
-    map.zoomControl.remove();
-});
+
 
 map.on('popupclose', function(e){
     map.dragging.enable();
@@ -205,32 +202,65 @@ map.on('popupclose', function(e){
     map.boxZoom.enable();
     map.keyboard.enable();
     map.zoomControl.addTo(map);
+    
+
 });
 
 
 map.on('resize', function(e){
-map.closePopup();
+    map.closePopup();
+    resized = true;
 
+    //if (english == true) {
+    //    changeLanguage("en");
+    //}
+    //else {
+    //    changeLanguage("al");
+    //}
 });
 
 
 
-map.on('popupopen', function(event) {  
+map.on('popupopen', function (event) {
+    map.dragging.disable()
+    map.removeControl(controls);
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.boxZoom.disable();
+    map.keyboard.disable();
+    map.zoomControl.remove();
+
     var popup = event.popup;
-    var mapWidth = map.getSize().x;
-    var mapHeight = map.getSize().y;
-    var popUpWidth = mapWidth * 0.8;
-    var popUpHeight = mapHeight * 0.6;
-    var imageWidth = popUpWidth * 0.8;
-    var imageHeight = imageWidth * 0.6;
+  
+
+
+    var layer = event.popup._source;
+    var feature = layer.feature;
+    
+    mapWidth = map.getSize().x;
+    mapHeight = map.getSize().y;
+    popUpWidth = mapWidth * 0.8;
+    popUpHeight = mapHeight * 0.6;
+    imageWidth = popUpWidth * 0.8;
+    imageHeight = imageWidth * 0.6;
     popup.options.maxWidth = popUpWidth;
     popup.options.maxHeight = popUpHeight;
     popup.update();
-    console.log(popUpWidth);
-    console.log(popUpHeight);
-    console.log(imageWidth);
-    console.log(imageHeight);
-});
+
+
+    console.log(feature);
+    layer.unbindPopup(popup);
+    popUpPlaces(feature, layer);
+  
+       
+    
+    //console.log(popUpWidth);
+    //console.log(popUpHeight);
+    //console.log(popup);
+    });
+
+    
 
 
 map.whenReady(function(){
@@ -241,6 +271,7 @@ if (hash == "0")
     placesImported._layers[28].openPopup();
 }
 
+  
 
     
 });
