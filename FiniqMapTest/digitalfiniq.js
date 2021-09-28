@@ -10,7 +10,8 @@ var mapOptions = {
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
  maxZoom : 20,  //set max zoom level
- minZoom: 14,
+  //min zoom should be 14
+ minZoom: 0,
  touchZoom: true,
 //  maxBounds: [
 //         //south west
