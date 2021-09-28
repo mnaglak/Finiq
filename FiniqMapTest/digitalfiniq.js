@@ -279,7 +279,7 @@ if (hash == "0")
 });
 
 
-placeholders for the L.marker and L.circle representing user's current position  
+//placeholders for the L.marker and L.circle representing user's current position  
 var current_position
 
 function onLocationFound(e) {
