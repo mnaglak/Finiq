@@ -1,4 +1,4 @@
-
+﻿
 var hash = window.location.hash.substr(1);
 
   
@@ -10,15 +10,14 @@ var mapOptions = {
  center: [39.91381644734087, 20.055112781752946], //set center Lat/Long of your area of interest
  zoom: 16, //set initial zoom level
  maxZoom : 20,  //set max zoom level
-  //min zoom should be 14
- minZoom: 0,
+ minZoom: 14,
  touchZoom: true,
-//  maxBounds: [
-//         //south west
-//         [39.90844802793145, 20.03472901279505],
-//         //north east
-//         [39.93, 20.079004232431558]
-//         ],
+ maxBounds: [
+        //south west
+        [39.90844802793145, 20.03472901279505],
+        //north east
+        [39.93, 20.079004232431558]
+        ],
  }
 
 var sfLink = 'https://sketchfab.com/3d-models/archaeology-in-action-546273d5fd4b4625ad61f8837c9fcfc2';
@@ -33,7 +32,7 @@ var popUpWidth = mapWidth * 0.8;
 var popUpHeight = mapHeight * 0.6;
 var imageWidth = popUpWidth * 0.8;
 var imageHeight = imageWidth * 0.6;
-var images = [null, "image1.png", "image2.png", "image3.png"];
+var images = [null, "image1.png", "image2.png", "image3.png", "image4.png", "image5.png", "image6.png", "image7.png", "image8.png", "image9.png"];
 var currentImage = null;
 
 
@@ -61,41 +60,39 @@ var entranceImported = L.geoJSON(entrance, {
 var pathsImported = L.geoJSON(paths, {
     style: {
         //color: "#D38715",
-        color: "silver",
-        weight: 5,
-        opacity: 1,
-        fillOpacity: .8,
-        dashArray: '8, 6'
+        color: "orange",
+        weight: 4,
+        opacity: .3
     }
     });
 
 var houseImported = L.geoJSON(houseOfTwoPeristyles, {
     style: {
+        weight: 1,
         color: "black",
-        opacity: 1,
-        fillOpacity: .3
+        opacity: .5,
+        fillOpacity: .5
     }
     });
 
 var wallsImported = L.geoJSON(walls, {
     style: {
-        weight: 10,
+        weight: 3,
         color: "black",
         opacity: 0.8,
-    
-    
     }
 });
 
 var streetsImported = L.geoJSON(streets, {
     style: {
-        weight: 5,
+        weight: 2,
         color: "white",
-        opacity: 0.4,
-        fillOpacity: 0
-
+        opacity: 0.3,
+        dashArray: '12'
     }
 });
+
+
 
 var infoIcon = L.icon({
     iconUrl: 'info.png',
@@ -105,19 +102,19 @@ var infoIcon = L.icon({
     iconAnchor: [75, 100], // point of the icon which will correspond to marker's location
     popupAnchor: [0, -25] // point from which the popup should open relative to the iconAnchor
 });
- 
-var entrancePopup = "<center><b>Ancient Finiq</b></center><br>A paragraph of information giving an overview of the city";
-var entrancePopupAL = "<center><b>Ancient Finiq</b></center><br>Some text in Albanian";
+
+var entrancePopup = "<center><b>Ancient Finiq</b></center><br>The settlement of ancient Finiq was one of the largest communities in the region of Epirus during the Hellenistic period and was the capital of Chaonia, one of the fourteen Epirote tribal. While evidence from the 5th and 4th centuries BCE point to the settlement’s earliest origins, its true urban development dates primarily to the 3rd century BCE, culminating in the city becoming capital of the Epirote League. During the Third Macedonian War, the region of Chaonia supported the Roman Republic, resulting in Finiq being spared from Roman destruction when the war ended in 168 BCE. As a Roman community, Finiq lasted for several centuries and experienced an important phase under the Byzantine Emperor Justinian during the 6th century CE. During this period, Finiq became a vescoval see and featured a variety of early Christian religious buildings.<br><br>First excavated by Luigi Maria Ugolini in the 1920s and more recently by the Italian Archaeological Mission, the history of Finiq continues to be written as archaeologists peel back its layers year - by - year.This interactive map tells the story of the most important archaeological discoveries over the past century, including grand public buildings, monumental defensive structures, fascinating private residences, and a multilayered burial ground which served as the final resting place for centuries of generations of the settlement’s inhabitants.Within the map, occasional links to 3D content help bring this story to life and illustrate the reconstructions imagined by archaeologists who have excavated and studied this site.<br><br>Enjoy your exploration of ancient Finiq!<br><br><i>Designed and created by <b>Sabian Hasani and Tyler Duane Johnson</b> with the support of the <b>Albanian Ministry of Culture</b> and the <b>Italian-Albanian Archaeological Mission at Phoinike</b></i><br><br> ";
+var entrancePopupAL = "<center><b>Ancient Finiq</b></center><br>ALBANIAN The settlement of ancient Finiq was one of the largest communities in the region of Epirus during the Hellenistic period and was the capital of Chaonia, one of the fourteen Epirote tribal. While evidence from the 5th and 4th centuries BCE point to the settlement’s earliest origins, its true urban development dates primarily to the 3rd century BCE, culminating in the city becoming capital of the Epirote League. During the Third Macedonian War, the region of Chaonia supported the Roman Republic, resulting in Finiq being spared from Roman destruction when the war ended in 168 BCE. As a Roman community, Finiq lasted for several centuries and experienced an important phase under the Byzantine Emperor Justinian during the 6th century CE. During this period, Finiq became a vescoval see and featured a variety of early Christian religious buildings.<br><br>First excavated by Luigi Maria Ugolini in the 1920s and more recently by the Italian Archaeological Mission, the history of Finiq continues to be written as archaeologists peel back its layers year - by - year.This interactive map tells the story of the most important archaeological discoveries over the past century, including grand public buildings, monumental defensive structures, fascinating private residences, and a multilayered burial ground which served as the final resting place for centuries of generations of the settlement’s inhabitants.Within the map, occasional links to 3D content help bring this story to life and illustrate the reconstructions imagined by archaeologists who have excavated and studied this site.<br><br>Enjoy your exploration of ancient Finiq!";;
     
 
 Esri_WorldImagery.addTo(map);
 map.addLayer(placesImported);
-map.addLayer(houseImported);
 map.addLayer(wallsImported);
 
 
 map.addLayer(pathsImported);
 entranceMarker = new L.Marker([39.91351259783837, 20.059624328713472], { icon: infoIcon }).bindPopup(entrancePopup, { maxHeight: 200, maxWidth: 200, closeOnClick: true }).addTo(map);
+
 
 var english = true;
 var entranceMarkerAL;
@@ -149,15 +146,12 @@ function changeLanguage(lang) {
         var myImageW = imageWidth;
         var myImageH = imageHeight;
         if (f.properties) {
-            out.push('<b>Name: </b>' + f.properties.Name);
+            out.push('<b><u>' + f.properties.Name + '</u></b>');
             out.push('<br><b>Date: </b>' + f.properties.Date);
-            out.push('<br><b>Description: </b>' + f.properties.Descriptio);
-            out.push('<br><b>More Information: </b>' + f.properties.More);
-            out.push('<br><b>Historical Context: </b>' + f.properties.Hist);
             if (f.properties.ThreeD) {
                 out.push('<br><b>3D model: </b>' + '<a href="' + f.properties.ThreeD + '"target="_blank">Visit Sketchfab</a>');
             }
-            out.push('<br><b>Select Bibliography: </b><center>' + f.properties.Biblio + '<br>');
+            out.push('<br><b>Description: </b>' + f.properties.Descriptio + '<br><center>');
             //if (f.properties.image)
             //{
             //    console.log(myImageW);
@@ -166,6 +160,7 @@ function changeLanguage(lang) {
             //}
 
             l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
+           
             
         }
     }
@@ -186,9 +181,9 @@ function popUpEntrance(f, l) {
     };
 
     var clusterLayers = {
-        "Walking Path" : pathsImported,
-        "Ancient Buildings": houseImported,
+        "Walking Path": pathsImported,
         "Ancient Walls": wallsImported,
+        "Ancient Buildings": houseImported,
         "Ancient Streets": streetsImported
     };
 
@@ -241,6 +236,8 @@ map.on('popupopen', function (event) {
     popUpHeight = mapHeight * 0.6;
     imageWidth = popUpWidth * 0.8;
     imageHeight = imageWidth * 0.6;
+    logoWidth = popUpWidth * 0.6;
+    logoHeight = logoWidth / 3;
     popup.options.maxWidth = popUpWidth;
     popup.options.maxHeight = popUpHeight;
     popup.update();
@@ -248,9 +245,25 @@ map.on('popupopen', function (event) {
     if (marker != entranceMarker && marker != entranceMarkerAL) {
         var imageUpdate = images[marker.feature.properties.image];
         var captionUpdate = marker.feature.properties.caption;
-        var imageHTML = '<center><br><img src ="' + imageUpdate + '" width ="' + imageWidth + '" height ="' + imageHeight + '" > <br>' + captionUpdate + '</center>'
+        var imageHTML = '<center><br><img src ="' + imageUpdate + '" width ="' + imageWidth + '" height ="' + imageHeight + '" border = 2px solid white> <br>' + captionUpdate + '</center>'
         marker._popup.setContent(originalContent + imageHTML);
     }
+
+    if (marker == entranceMarker || marker == entranceMarkerAL) {
+    
+        var logoUpdate = "<center><img src = ministry_logo.png height ='" + logoHeight + "'width ='" + logoWidth + "' border = 2px solid white></center>"
+
+        if (english == true) {
+            marker._popup.setContent(entrancePopup + logoUpdate);
+        }
+        else {
+            marker._popup.setContent(entrancePopupAL + logoUpdate);
+        }
+
+       
+    }
+
+
    
    
     
@@ -280,27 +293,27 @@ if (hash == "0")
 });
 
 
-//placeholders for the L.marker and L.circle representing user's current position  
+// placeholders for the L.marker and L.circle representing user's current position  
 var current_position
 
 function onLocationFound(e) {
-   // if position defined, then remove the existing position circle from the map
-   if (current_position) {
-       map.removeLayer(current_position);
-   }
+    // if position defined, then remove the existing position circle from the map
+    if (current_position) {
+        map.removeLayer(current_position);
+    }
 
-   current_position = L.circle(e.latlng, 10).addTo(map);
-   current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
+    current_position = L.circle(e.latlng, 10).addTo(map);
+    current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
 
 
- }
+  }
 
- function onLocationError(e) {
-     alert(e.message);
- }
+  function onLocationError(e) {
+      alert(e.message);
+  }
 
- map.on('locationfound', onLocationFound);
- map.on('locationerror', onLocationError);
+  map.on('locationfound', onLocationFound);
+  map.on('locationerror', onLocationError);
 
 map.locate({ setView: false, watch: true });
 
