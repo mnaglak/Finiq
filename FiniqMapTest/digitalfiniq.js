@@ -305,8 +305,10 @@ if (hash == "0")
 });
 
 
-// placeholders for the L.marker and L.circle representing user's current position  
+// placeholders for the L.marker and L.circle representing user's current position
+
 var current_position
+var needToNotify = true;
 
 function onLocationFound(e) {
 
@@ -320,7 +322,11 @@ function onLocationFound(e) {
         current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
     }
     else {
-        alert("It looks like you are far away from Phoenike, so your position will not appear on the map.");
+        if (needToNotify == true) {
+            alert("It looks like you are far away from Phoenike, so your position will not appear on the map.");
+            needToNotify = false;
+        }
+        
     }
 
 
