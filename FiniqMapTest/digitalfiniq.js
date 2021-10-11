@@ -292,7 +292,7 @@ map.on('popupopen', function (event) {
 
 
 map.whenReady(function(){
-console.log(placesImported);
+//console.log(placesImported);
 
 if (hash == "0")
 {
@@ -309,19 +309,25 @@ if (hash == "0")
 var current_position
 
 function onLocationFound(e) {
-    // if position defined, then remove the existing position circle from the map
-    if (current_position) {
-        map.removeLayer(current_position);
-    }
 
-    current_position = L.circle(e.latlng, 10).addTo(map);
-    current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
+    if (map.getBounds().contains(e.latlng)) {
+        // if position defined, then remove the existing position circle from the map
+        if (current_position) {
+            map.removeLayer(current_position);
+        }
+
+        current_position = L.circle(e.latlng, 5).addTo(map);
+        current_position.bindTooltip("Your location", { permanent: true, direction: "bottom" })
+    }
+    else {
+        alert("It looks like you are far away from Phoenike, so your position will not appear on the map.");
+    }
 
 
   }
 
   function onLocationError(e) {
-      alert(e.message);
+      alert("Please update your device's settings to allow location services and refresh the page if you would like to see your live position.");
   }
 
   map.on('locationfound', onLocationFound);
