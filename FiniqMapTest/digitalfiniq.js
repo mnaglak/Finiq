@@ -1,7 +1,7 @@
 ﻿
 var hash = window.location.hash.substr(1);
 
-  
+
 
 
 //Define map start up options
@@ -105,7 +105,7 @@ var infoIcon = L.icon({
 
 var entrancePopup = "<center><b>Ancient Phoenike</b></center><br>The settlement of ancient Phoenike was one of the largest communities in the region of Epirus during the Hellenistic period and was the capital of Chaonia, one of the fourteen Epirote tribal. While evidence from the 5th and 4th centuries BCE point to the settlement’s earliest origins, its true urban development dates primarily to the 3rd century BCE, culminating in the city becoming capital of the Epirote League. During the Third Macedonian War, the region of Chaonia supported the Roman Republic, resulting in Phoenike being spared from Roman destruction when the war ended in 168 BCE. As a Roman community, Phoenike lasted for several centuries and experienced an important phase under the Byzantine Emperor Justinian during the 6th century CE. During this period, Phoenike became a vescoval see and featured a variety of early Christian religious buildings.<br><br>First excavated by Luigi Maria Ugolini in the 1920s and more recently by the Italian Archaeological Mission, the history of Phoenike continues to be written as archaeologists peel back its layers year - by - year. This interactive map tells the story of the most important archaeological discoveries over the past century, including grand public buildings, monumental defensive structures, fascinating private residences, and a multilayered burial ground which served as the final resting place for centuries of generations of the settlement’s inhabitants.Within the map, occasional links to 3D content help bring this story to life and illustrate the reconstructions imagined by archaeologists who have excavated and studied this site.<br><br>Enjoy your exploration of ancient Phoenike!<br><br><i>Designed and created by <b>Sabian Hasani and Tyler Duane Johnson</b> with the support of the <b>Albanian Ministry of Culture</b> and the <b>Italian-Albanian Archaeological Mission at Phoinike</b></i><br><br> ";
 var entrancePopupAL = "<center><b>Ancient Finiq</b></center><br>ALBANIAN The settlement of ancient Finiq was one of the largest communities in the region of Epirus during the Hellenistic period and was the capital of Chaonia, one of the fourteen Epirote tribal. While evidence from the 5th and 4th centuries BCE point to the settlement’s earliest origins, its true urban development dates primarily to the 3rd century BCE, culminating in the city becoming capital of the Epirote League. During the Third Macedonian War, the region of Chaonia supported the Roman Republic, resulting in Finiq being spared from Roman destruction when the war ended in 168 BCE. As a Roman community, Finiq lasted for several centuries and experienced an important phase under the Byzantine Emperor Justinian during the 6th century CE. During this period, Finiq became a vescoval see and featured a variety of early Christian religious buildings.<br><br>First excavated by Luigi Maria Ugolini in the 1920s and more recently by the Italian Archaeological Mission, the history of Finiq continues to be written as archaeologists peel back its layers year - by - year.This interactive map tells the story of the most important archaeological discoveries over the past century, including grand public buildings, monumental defensive structures, fascinating private residences, and a multilayered burial ground which served as the final resting place for centuries of generations of the settlement’s inhabitants.Within the map, occasional links to 3D content help bring this story to life and illustrate the reconstructions imagined by archaeologists who have excavated and studied this site.<br><br>Enjoy your exploration of ancient Finiq!";;
-    
+
 
 Esri_WorldImagery.addTo(map);
 map.addLayer(placesImported);
@@ -138,7 +138,7 @@ function changeLanguage(lang) {
 
 //Create popUp box function
 
-   
+
 
     function popUpPlaces(f,l) {
         var out = [];
@@ -150,18 +150,19 @@ function changeLanguage(lang) {
             out.push('<br><b>Date: </b>' + f.properties.Date);
             if (f.properties.ThreeD) {
                 out.push('<br><b>3D model: </b>' + '<a href="' + f.properties.ThreeD + '"target="_blank">Visit Sketchfab</a>');
+                out.push('<iframe title="House of the Two Peristyles (Ancient Phoenike)" width="' + imageWidth +'" height="' + imageHeight + '" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/12ff1f3852c2432c81136de698427cfc/embed"> </iframe>');
             }
             out.push('<br><b>Description: </b>' + f.properties.Descriptio + '<br><center>');
             //if (f.properties.image)
             //{
             //    console.log(myImageW);
             //    myImage = images[f.properties.image];
-            //    out.push('<br><center><img src ="' + myImage + '" width ="' + myImageW + '" height ="' + myImageH + '" > <br>' + f.properties.caption + '</center>');      
+            //    out.push('<br><center><img src ="' + myImage + '" width ="' + myImageW + '" height ="' + myImageH + '" > <br>' + f.properties.caption + '</center>');
             //}
 
             l.bindPopup(out.join("<br/>"), { maxHeight: popUpHeight, maxWidth: popUpWidth, closeOnClick: true });
-           
-            
+
+
         }
     }
 
@@ -207,7 +208,7 @@ map.on('popupclose', function(e){
         //north east
         [40.098806006678494, 20.262505016975012]
     ]);
-    
+
 
 });
 
@@ -241,7 +242,7 @@ map.on('popupopen', function (event) {
     var oldImageStart = content.indexOf('<c');
     var originalContent = content.substring(0, oldImageStart);
 
-  
+
     mapWidth = map.getSize().x;
     mapHeight = map.getSize().y;
     popUpWidth = mapWidth * 0.8;
@@ -262,7 +263,7 @@ map.on('popupopen', function (event) {
     }
 
     if (marker == entranceMarker || marker == entranceMarkerAL) {
-    
+
         var logoUpdate = "<center><img src = ministry_logo.png height ='" + logoHeight + "'width ='" + logoWidth + "' border = 2px solid white></center>"
 
         if (english == true) {
@@ -272,13 +273,13 @@ map.on('popupopen', function (event) {
             marker._popup.setContent(entrancePopupAL + logoUpdate);
         }
 
-       
+
     }
 
 
-   
-   
-    
+
+
+
 
 
     //console.log(feature);
@@ -288,7 +289,7 @@ map.on('popupopen', function (event) {
 
     });
 
-    
+
 
 
 map.whenReady(function(){
@@ -299,9 +300,9 @@ if (hash == "0")
     placesImported._layers[28].openPopup();
 }
 
-  
 
-    
+
+
 });
 
 
@@ -326,7 +327,7 @@ function onLocationFound(e) {
             alert("It looks like you are far away from Phoinike, so your position will not appear on the map.");
             needToNotify = false;
         }
-        
+
     }
 
 
